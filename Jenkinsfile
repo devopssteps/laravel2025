@@ -24,6 +24,13 @@ pipeline {
             steps {
                 sh 'php artisan test'
             }
+        }
+        // deploy to production 
+        stage('Deploy to production') {
+
+            steps {
+                sh 'ssh ubuntu@50.19.206.170 -o StrictHostKeyChecking=no "bash /var/www/larademo/scripts/deploy.sh" '
+            }
         }  
    }
 
