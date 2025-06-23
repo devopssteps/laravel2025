@@ -44,5 +44,24 @@ pipeline {
             }
         }  
    }
+   post {
+     // send email notification the specicied addresses if the build fails
+        failure {  
+             mail bcc: '', body: "<b>Failed Jenkins Build</b><br>Project: ${env.JOB_NAME} \
+             <br>Build Number: ${env.BUILD_NUMBER} <br> URL of the build: ${env.BUILD_URL}", cc: '', \
+             charset: 'UTF-8', from: 'rajiv19831@gmail.com', mimeType: 'text/html', replyTo: 'rajiv19831@gmail.com', \
+             subject: "ERROR CI: Project name -> ${env.JOB_NAME}", \
+             to: "rajiv19831@gmail.com";  \
+        }
+        // send email notification the specicied addresses if the build fails
+        success {  
+             mail bcc: '', body: "<b>Success Jenkins Build</b><br>Project: ${env.JOB_NAME} \
+             <br>Build Number: ${env.BUILD_NUMBER} <br> URL of the build: ${env.BUILD_URL}", cc: '', \
+             charset: 'UTF-8', from: 'rajiv19831@gmail.com', mimeType: 'text/html', replyTo: 'rajiv19831@gmail.com', \
+             subject: "SUCCESS CI: Project name -> ${env.JOB_NAME}", \
+             to: "rajiv19831@gmail.com";  \
+         } 
+ 
+    }
 
 }
